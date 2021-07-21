@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/sukebei-open-links
 // @match       https://sukebei.nyaa.si/view/*
 // @grant       GM_openInTab
-// @version     0.20210721.0
+// @version     0.20210721.1
 // @author      Gea-Suan Lin <gslin@gslin.com>
 // @description Open links on sukebei.nyaa.si
 // @license     MIT
@@ -26,6 +26,10 @@
         // Use reverse() to correct the order.
         for (let el of Array.from(desc.querySelectorAll('a')).reverse()) {
             let url = el.getAttribute('href');
+            if (url.startsWith('https://sukebei.nyaa.si/')) {
+                return;
+            }
+
             GM_openInTab(url, true);
         }
     });
