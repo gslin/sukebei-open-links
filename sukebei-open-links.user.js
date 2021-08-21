@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/sukebei-open-links
 // @match       https://sukebei.nyaa.si/view/*
 // @grant       GM_openInTab
-// @version     0.20210721.1
+// @version     0.20210822.0
 // @author      Gea-Suan Lin <gslin@gslin.com>
 // @description Open links on sukebei.nyaa.si
 // @license     MIT
@@ -12,28 +12,26 @@
 (() => {
     'use strict';
 
-    let desc = document.getElementById('torrent-description');
-    if (!desc) {
-        return;
-    }
+    let tick = setInterval(() => {
+        if (0 === document.querySelectorAll('#torrent-description p').length) {
+            return;
+        }
 
-    let btn = document.createElement('button');
-    btn.innerText = 'Open links';
-    btn.style = 'font-size: 2em; margin: 16px;';
-    btn.setAttribute('accesskey', 's');
+        // Uninstall
+        clearInterval(tick);
 
-    btn.addEventListener('click', () => {
         // Use reverse() to correct the order.
-        for (let el of Array.from(desc.querySelectorAll('a')).reverse()) {
+        for (let el of Array.from(document.querySelectorAll('#torrent-description a')).reverse()) {
             let url = el.getAttribute('href');
             if (url.startsWith('https://sukebei.nyaa.si/')) {
-                return;
+                continue;
+            }
+
+            if (url.startsWith('http://imgblaze.net/')) {
+                continue;
             }
 
             GM_openInTab(url, true);
         }
-    });
-
-    // Insert the button.
-    desc.insertAdjacentElement('beforebegin', btn);
+    }, 100);
 })();
