@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/sukebei-open-links
 // @match       https://sukebei.nyaa.si/view/*
 // @grant       GM_openInTab
-// @version     0.20210822.0
+// @version     0.20231124.0
 // @author      Gea-Suan Lin <gslin@gslin.com>
 // @description Open links on sukebei.nyaa.si
 // @license     MIT
@@ -21,7 +21,7 @@
         clearInterval(tick);
 
         // Use reverse() to correct the order.
-        for (let el of Array.from(document.querySelectorAll('#torrent-description a')).reverse()) {
+        for (let el of Array.from(document.querySelectorAll('#torrent-description a'))) {
             let url = el.getAttribute('href');
             if (url.startsWith('https://sukebei.nyaa.si/')) {
                 continue;
