@@ -3,7 +3,7 @@
 // @namespace   https://github.com/gslin/sukebei-open-links
 // @match       https://sukebei.nyaa.si/view/*
 // @grant       GM_openInTab
-// @version     0.20231125.0
+// @version     0.20231125.1
 // @author      Gea-Suan Lin <gslin@gslin.com>
 // @description Open links on sukebei.nyaa.si
 // @license     MIT
@@ -31,7 +31,7 @@
                 continue;
             }
 
-            GM_openInTab(url);
+            GM_openInTab(url, {active: false, insert: true});
         }
     }, 100);
 })();
